@@ -1,0 +1,9 @@
+baseURL = "https://richwei.github.io/"
+languageCode = "zh-cn"
+title = "Richwei"
+theme = "PaperMod"
+
+[params]
+  author = "魏睿辰"
+  ShowReadingTime = true
+  ShowCodeCopyButtons = true

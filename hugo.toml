@@ -1,9 +1,49 @@
 baseURL = "https://richwei.github.io/"
-languageCode = "zh-cn"
-title = "Richwei"
 theme = "PaperMod"
+defaultContentLanguage = "zh"
+defaultContentLanguageInSubdir = false
+
+[pagination]
+  pagerSize = 5
+
+[languages.zh]
+  languageName = "中文"
+  languageCode = "zh-CN"
+  weight = 1
+  title = "Richwei"
+  [[languages.zh.menu.main]]
+    identifier = "posts"
+    name = "文章"
+    url = "/posts/"
+    weight = 1
+
+[languages.en]
+  languageName = "English"
+  languageCode = "en-US"
+  weight = 2
+  title = "Richwei"
+  [[languages.en.menu.main]]
+    identifier = "posts"
+    name = "Posts"
+    url = "/posts/"
+    weight = 1
 
 [params]
-  author = "魏睿辰"
+  author = "richwei"
+  defaultTheme = "light"
+  disableThemeToggle = true
+  disableLangToggle = false
   ShowReadingTime = true
   ShowCodeCopyButtons = true
+  ShowPostNavLinks = true
+  ShowBreadCrumbs = true
+  mainSections = ["posts"]
+
+  [params.homepage]
+    academicTagline = "Research interests include LLM agents, robotic perception, and real-world task automation."
+    github = "https://github.com/Autoni09"
+    xiaohongshu = "https://www.xiaohongshu.com/"
+    wechatQRImage = ""
+    wechatLabel = "公众号"
+    avatar = ""
+    avatarAlt = "Profile photo"

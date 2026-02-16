@@ -1,0 +1,99 @@
+{{- define "main" }}
+{{- $sections := site.Params.mainSections | default (slice "posts") -}}
+{{- $pages := where site.RegularPages "Type" "in" $sections -}}
+{{- $pages = where $pages "Lang" .Lang -}}
+{{- $pages = where $pages "Params.hiddenInHomeList" "!=" true -}}
+
+<section class="academic-hero">
+  <div class="academic-hero__text">
+    <h1>{{ site.Title }}</h1>
+    <p class="academic-hero__tagline">{{ i18n "academic_tagline" }}</p>
+    <div class="post-content academic-hero__about">
+      {{- .Content }}
+    </div>
+    <div class="academic-social">
+      {{- with site.Params.homepage.github }}
+      <a href="{{ . | safeURL }}" target="_blank" rel="noopener noreferrer">GitHub</a>
+      {{- end }}
+      {{- with site.Params.homepage.xiaohongshu }}
+      <a href="{{ . | safeURL }}" target="_blank" rel="noopener noreferrer">{{ i18n "xiaohongshu" }}</a>
+      {{- end }}
+      <button type="button" class="wechat-trigger" id="wechat-trigger">{{ i18n "wechat" }}</button>
+    </div>
+  </div>
+
+  <div class="academic-hero__avatar">
+    {{- with site.Params.homepage.avatar }}
+    <img src="{{ . | absURL }}" alt="{{ site.Params.homepage.avatarAlt | default `Avatar` }}">
+    {{- else }}
+    <div class="avatar-placeholder">Avatar</div>
+    {{- end }}
+  </div>
+</section>
+
+<section class="home-recent-posts">
+  <header class="home-section-header">
+    <h2>{{ i18n "recent_posts" }}</h2>
+  </header>
+
+  {{- range first 5 ($pages.ByDate.Reverse) }}
+  <article class="post-entry">
+    <header class="entry-header">
+      <h2 class="entry-hint-parent">{{ .Title }}</h2>
+    </header>
+    <div class="entry-content">
+      <p>{{ .Summary | plainify | htmlUnescape }}{{ if .Truncated }}...{{ end }}</p>
+    </div>
+    <footer class="entry-footer">
+      {{- partial "post_meta.html" . -}}
+    </footer>
+    <a class="entry-link" aria-label="post link to {{ .Title | plainify }}" href="{{ .Permalink }}"></a>
+  </article>
+  {{- end }}
+
+  <a class="academic-more-posts" href="{{ "posts/" | absLangURL }}">{{ i18n "view_all_posts" }}</a>
+</section>
+
+<div class="qr-modal" id="wechat-modal" aria-hidden="true">
+  <div class="qr-modal__overlay" data-close-modal></div>
+  <div class="qr-modal__panel" role="dialog" aria-modal="true" aria-label="{{ i18n "wechat_qr_title" }}">
+    <button type="button" class="qr-modal__close" data-close-modal aria-label="Close">x</button>
+    <h3>{{ i18n "wechat_qr_title" }}</h3>
+    {{- with site.Params.homepage.wechatQRImage }}
+    <img src="{{ . | absURL }}" alt="{{ i18n "wechat_qr_title" }}">
+    {{- else }}
+    <p>{{ i18n "wechat_qr_missing" }}</p>
+    {{- end }}
+  </div>
+</div>
+
+<script>
+  (function () {
+    const trigger = document.getElementById("wechat-trigger");
+    const modal = document.getElementById("wechat-modal");
+    if (!trigger || !modal) return;
+
+    function closeModal() {
+      modal.classList.remove("is-open");
+      modal.setAttribute("aria-hidden", "true");
+      document.body.classList.remove("modal-open");
+    }
+
+    trigger.addEventListener("click", function () {
+      modal.classList.add("is-open");
+      modal.setAttribute("aria-hidden", "false");
+      document.body.classList.add("modal-open");
+    });
+
+    modal.querySelectorAll("[data-close-modal]").forEach(function (el) {
+      el.addEventListener("click", closeModal);
+    });
+
+    document.addEventListener("keydown", function (event) {
+      if (event.key === "Escape" && modal.classList.contains("is-open")) {
+        closeModal();
+      }
+    });
+  })();
+</script>
+{{- end }}

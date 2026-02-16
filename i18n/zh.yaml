@@ -1,0 +1,23 @@
+- id: about
+  translation: "About"
+
+- id: recent_posts
+  translation: "最近文章"
+
+- id: view_all_posts
+  translation: "查看全部文章"
+
+- id: wechat
+  translation: "公众号"
+
+- id: wechat_qr_title
+  translation: "公众号二维码"
+
+- id: wechat_qr_missing
+  translation: "请在配置中补充二维码图片路径"
+
+- id: xiaohongshu
+  translation: "小红书"
+
+- id: academic_tagline
+  translation: "研究兴趣包括大模型智能体、机器人感知与真实世界任务自动化。"

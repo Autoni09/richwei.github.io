@@ -1,0 +1,23 @@
+- id: about
+  translation: "About"
+
+- id: recent_posts
+  translation: "Recent Posts"
+
+- id: view_all_posts
+  translation: "View all posts"
+
+- id: wechat
+  translation: "WeChat"
+
+- id: wechat_qr_title
+  translation: "WeChat QR"
+
+- id: wechat_qr_missing
+  translation: "Please set your WeChat QR image path in config."
+
+- id: xiaohongshu
+  translation: "Xiaohongshu"
+
+- id: academic_tagline
+  translation: "Research interests include LLM agents, robotic perception, and real-world task automation."
